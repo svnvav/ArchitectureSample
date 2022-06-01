@@ -3,12 +3,19 @@ using System.Collections.Generic;
 
 namespace ArchitectureSample
 {
-    public class StateMachine
+    public class GameStateMachine
     {
-        private readonly Dictionary<Type, IState> _statesMap = new();
+        private readonly Dictionary<Type, IState> _statesMap;
 
         private IState _current;
 
+        public GameStateMachine()
+        {
+            _statesMap = new Dictionary<Type, IState>()
+            {
+                {typeof(BootstrapState), new BootstrapState(this)}
+            };
+        }
 
         public void RegisterState<TState>(TState state) where TState : IState
         {

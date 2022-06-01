@@ -5,11 +5,14 @@ namespace ArchitectureSample
 {
     public class GameEntry : MonoBehaviour
     {
-        private StateMachine _gameStateMachine;
+        private Game _game;
 
         private void Awake()
         {
-            _gameStateMachine = new StateMachine();
+            _game = new Game();
+            _game.StateMachine.ChangeState<BootstrapState>();
+            
+            DontDestroyOnLoad(this);
         }
 
         void Start()
